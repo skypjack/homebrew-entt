@@ -12,7 +12,12 @@ URL="https://github.com/skypjack/entt/archive/v$VERSION.tar.gz"
 FORMULA="entt.rb"
 
 # download the repo at the version
-curl "$URL" -L -s -o archive.tar.gz
+# exit with error messages if curl fails
+curl "$URL" -L --fail --silent --show-error --output archive.tar.gz
+if [ $? != 0 ]
+then
+  exit 1
+fi
 
 # compute sha256 hash
 HASH="$(openssl sha256 archive.tar.gz | cut -d " " -f 2)"
@@ -28,7 +33,7 @@ sed -i -e '/url/s/".*"/"'$ESCAPED_URL'"/' $FORMULA
 # change the hash in the formula file
 sed -i -e '/sha256/s/".*"/"'$HASH'"/' $FORMULA
 
-# sed creates a temporary file
+# delete temporary file created by sed
 rm "$FORMULA-e"
 
 # run checks with homebrew
