@@ -5,19 +5,8 @@ class Entt < Formula
   sha256 "84595803e3bb4ada0167644ecf4bc202db9649b0f975280914ac005d3628cb88"
   head "https://github.com/skypjack/entt.git"
 
-  option "with-docs", "Install the HTML documentation"
-
-  depends_on "cmake" => :build if build.with? "docs"
-  depends_on "doxygen" => :build if build.with? "docs"
-
   def install
     include.install "src/entt"
-    if build.with? "docs"
-      cd "build"
-      system "cmake", ".."
-      system "make", "docs"
-      (prefix/"docs").install "docs/html"
-    end
   end
 
   test do

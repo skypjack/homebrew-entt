@@ -13,7 +13,7 @@ FORMULA="entt.rb"
 
 # download the repo at the version
 # exit with error messages if curl fails
-curl "$URL" -L --fail --silent --show-error --output archive.tar.gz
+curl "$URL" --location --fail --silent --show-error --output archive.tar.gz
 if [ $? != 0 ]
 then
   exit 1
