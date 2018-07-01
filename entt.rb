@@ -1,19 +1,19 @@
 class Entt < Formula
   desc "Fast and reliable entity-component system and much more"
   homepage "https://skypjack.github.io/entt/"
-  url "https://github.com/skypjack/entt/archive/v2.6.1.tar.gz"
-  sha256 "84595803e3bb4ada0167644ecf4bc202db9649b0f975280914ac005d3628cb88"
+  url "https://github.com/skypjack/entt/archive/v2.7.0.tar.gz"
+  sha256 "adf89ddcebe2f90005106376b11434adcfed9f92b3dc365597bea00dec5e0957"
   head "https://github.com/skypjack/entt.git"
 
-  option "with-docs", "Build and install the HTML documentation (with cmake and doxygen)"
+  option "with-docs", "Build the documentation with cmake and doxygen --with-graphviz. Homebrew will not install doxygen --with-graphviz automatically"
 
   depends_on "cmake" => :build if build.with? "docs"
-  depends_on "doxygen" => [:build, "with-graphviz"] if build.with? "docs"
+  depends_on "doxygen" => :build if build.with? "docs"
 
   def install
-    if build.with? "docs"  
-      cd "build"  
-      system "cmake", "..", "-DBUILD_TESTING=NO", "-DBUILD_DOCS=YES", *std_cmake_args  
+    if build.with? "docs"
+      cd "build"
+      system "cmake", "..", "-DBUILD_TESTING=NO", "-DBUILD_DOCS=YES", *std_cmake_args
       system "make"
       system "make", "install"
     else

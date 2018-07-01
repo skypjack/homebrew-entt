@@ -11,8 +11,11 @@ VERSION="$1"
 URL="https://github.com/skypjack/entt/archive/v$VERSION.tar.gz"
 FORMULA="entt.rb"
 
+echo "Updating to v$VERSION"
+
 # download the repo at the version
 # exit with error messages if curl fails
+echo "Curling..."
 curl "$URL" --location --fail --silent --show-error --output archive.tar.gz
 if [ $? != 0 ]
 then
@@ -20,10 +23,13 @@ then
 fi
 
 # compute sha256 hash
+echo "Hashing..."
 HASH="$(openssl sha256 archive.tar.gz | cut -d " " -f 2)"
 
 # delete the archive
 rm archive.tar.gz
+
+echo "Sedding..."
 
 # change the url in the formula file
 # the slashes in the URL must be escaped
@@ -38,6 +44,7 @@ rm "$FORMULA-e"
 
 # run checks with homebrew
 # print error message and exit if the checks fail
+echo "Auditing..."
 AUDIT_ERRORS="$(brew audit --strict $FORMULA)"
 if [ -n "$AUDIT_ERRORS" ]
 then
@@ -46,6 +53,7 @@ then
 fi
 
 # update remote repo
+echo "Gitting..."
 git add entt.rb
 git commit -m "Update to v$VERSION"
 git push origin master
