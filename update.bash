@@ -45,7 +45,9 @@ rm "$FORMULA-e"
 # run checks with homebrew
 # print error message and exit if the checks fail
 echo "Auditing..."
-AUDIT_ERRORS="$(brew audit --strict $FORMULA)"
+# --except=style is silence warnings about depending on doxygen --with-graphviz
+# homebrew supports it but audit doesn't like it.
+AUDIT_ERRORS="$(brew audit --strict --online --except=style $FORMULA)"
 if [ -n "$AUDIT_ERRORS" ]
 then
   echo "$AUDIT_ERRORS"

@@ -5,10 +5,10 @@ class Entt < Formula
   sha256 "adf89ddcebe2f90005106376b11434adcfed9f92b3dc365597bea00dec5e0957"
   head "https://github.com/skypjack/entt.git"
 
-  option "with-docs", "Build the documentation with cmake and doxygen --with-graphviz. Homebrew will not install doxygen --with-graphviz automatically"
+  option "with-docs", "Build the documentation with cmake and doxygen --with-graphviz"
 
   depends_on "cmake" => :build if build.with? "docs"
-  depends_on "doxygen" => :build if build.with? "docs"
+  depends_on "doxygen" => [:build, "with-graphviz"] if build.with? "docs"
 
   def install
     if build.with? "docs"
