@@ -1,8 +1,8 @@
 class Entt < Formula
   desc "Fast and reliable entity-component system and much more"
   homepage "https://skypjack.github.io/entt/"
-  url "https://github.com/skypjack/entt/archive/v2.6.1.tar.gz"
-  sha256 "84595803e3bb4ada0167644ecf4bc202db9649b0f975280914ac005d3628cb88"
+  url "https://github.com/skypjack/entt/archive/v2.7.0.tar.gz"
+  sha256 "adf89ddcebe2f90005106376b11434adcfed9f92b3dc365597bea00dec5e0957"
   head "https://github.com/skypjack/entt.git"
 
   def install
