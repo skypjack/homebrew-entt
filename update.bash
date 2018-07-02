@@ -11,6 +11,11 @@ VERSION="$1"
 URL="https://github.com/skypjack/entt/archive/v$VERSION.tar.gz"
 FORMULA="entt.rb"
 
+echo "Pulling..."
+# I accidentally created a merge commit
+# NEVER AGAIN!
+git pull --rebase origin master
+
 echo "Updating to v$VERSION"
 
 # download the repo at the version
