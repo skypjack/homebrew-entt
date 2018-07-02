@@ -1,4 +1,4 @@
-# EnTT homebrew formula
+# EnTT Homebrew Formula
 
 This is the [homebrew](https://brew.sh/) formula for [EnTT](https://github.com/skypjack/entt#introduction).
 
