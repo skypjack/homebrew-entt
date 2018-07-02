@@ -3,12 +3,12 @@
 # only argument should be the version to upgrade to
 if [ $# != 1 ]
 then
-  echo "Expected version to update to"
+  echo "Expected a version like v2.7.1"
   exit 1
 fi
 
 VERSION="$1"
-URL="https://github.com/skypjack/entt/archive/v$VERSION.tar.gz"
+URL="https://github.com/skypjack/entt/archive/$VERSION.tar.gz"
 FORMULA="entt.rb"
 
 echo "Pulling..."
@@ -16,7 +16,7 @@ echo "Pulling..."
 # NEVER AGAIN!
 git pull --rebase origin master
 
-echo "Updating to v$VERSION"
+echo "Updating to $VERSION"
 
 # download the repo at the version
 # exit with error messages if curl fails
@@ -50,5 +50,5 @@ rm "$FORMULA-e"
 # update remote repo
 echo "Gitting..."
 git add entt.rb
-git commit -m "Update to v$VERSION"
+git commit -m "Update to $VERSION"
 git push origin master
