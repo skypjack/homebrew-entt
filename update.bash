@@ -42,18 +42,6 @@ sed -i -e '/sha256/s/".*"/"'$HASH'"/' $FORMULA
 # delete temporary file created by sed
 rm "$FORMULA-e"
 
-# run checks with homebrew
-# print error message and exit if the checks fail
-echo "Auditing..."
-# --except=style is silence warnings about depending on doxygen --with-graphviz
-# homebrew supports it but audit doesn't like it.
-AUDIT_ERRORS="$(brew audit --strict --online --except=style $FORMULA)"
-if [ -n "$AUDIT_ERRORS" ]
-then
-  echo "$AUDIT_ERRORS"
-  exit 1
-fi
-
 # update remote repo
 echo "Gitting..."
 git add entt.rb
