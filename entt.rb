@@ -26,33 +26,30 @@ class Entt < Formula
       #include <entt/entt.hpp>
 
       struct Position {
-        int x;
-        int y;
+        int x, y;
       };
 
-      void moveSystem(entt::DefaultRegistry &reg, Position shift) {
-        auto view = reg.view<Position>();
-        for (const uint32_t entity : view) {
-          Position &pos = view.get(entity);
+      void moveSystem(entt::registry &reg, Position shift) {
+        reg.view<Position>().each([shift](auto &pos) {
           pos.x += shift.x;
           pos.y += shift.y;
-        }
+        });
       }
 
       int main() {
-        entt::DefaultRegistry reg;
-        uint32_t entity = reg.create();
+        entt::registry reg;
+        const auto entity = reg.create();
         reg.assign<Position>(entity, 2, 6);
         moveSystem(reg, {4, 4});
 
-        Position expected = {6, 10};
-        Position actual = reg.get<Position>(entity);
+        const Position expected = {6, 10};
+        const Position actual = reg.get<Position>(entity);
         reg.destroy(entity);
 
         return actual.x != expected.x || actual.y != expected.y;
       }
     EOS
-    system ENV.cxx, "-std=c++14", "test.cpp", "-o", "test"
+    system ENV.cxx, "-std=c++17", "test.cpp", "-o", "test"
     system "./test"
   end
 end
