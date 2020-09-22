@@ -1,8 +1,8 @@
 class Entt < Formula
   desc "Fast and reliable entity-component system and much more"
   homepage "https://skypjack.github.io/entt/"
-  url "https://github.com/skypjack/entt/archive/refs/tags/v3.5.1.tar.gz"
-  sha256 "7a04e5b1b8f5018d41a1d546478cbc24eb952cb85d8e6f2ebc5dd21521efdd2c"
+  url "https://github.com/skypjack/entt/archive/refs/tags/v3.5.2.tar.gz"
+  sha256 "52022d4393ddc8c43f2a9874ace17fc359db65056f0d813849714f5e7a7a1a9c"
   head "https://github.com/skypjack/entt.git"
 
   option "with-docs", "Build the documentation with cmake and doxygen --with-graphviz"
